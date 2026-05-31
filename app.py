@@ -1,12 +1,15 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# remove on production
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.jinja_env.auto_reload = True
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def dashboard():
+    return render_template("dashboard.html")
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

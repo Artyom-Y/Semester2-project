@@ -17,9 +17,6 @@ __pycache__/
 # Env and secrets
 .env
 
-# ChromaDB persistent storage
-chroma_db/
-
 # OS/editor files
 .DS_Store
 .vscode/
