@@ -2,6 +2,7 @@ import random
 import sqlite3
 
 paris_postal_codes = [i for i in range(70001, 70020 + 1)]
+
 seine_saint_denis_codes = [
     93000, 93100, 93110, 93120, 93140, 93150, 93160, 93170, 93190,
     93220, 93230, 93240, 93250, 93260, 93270, 93290, 93300, 93310,
@@ -24,7 +25,10 @@ hauts_de_seine_codes = [
     92500, 92210, 92330, 92310, 92150, 92170, 92420, 92410, 92390
 ]
 
-def random_customer(hospital, in_paris_chance = 0.66): # according to our client, 66% customers are in Paris
+suburb_codes = seine_saint_denis_codes + val_de_marne_codes + hauts_de_seine_codes
+
+
+def random_customer(in_paris_chance = 0.66): # according to our client, 66% customers are in Paris
     """Helper function for generating a random customer. 
     We don't have access to any real data, so we use mock one."""
     in_paris = False
@@ -32,30 +36,27 @@ def random_customer(hospital, in_paris_chance = 0.66): # according to our client
         in_paris = True
 
     if not in_paris:
-        customer_code = random.choice(seine_saint_denis_codes + val_de_marne_codes + hauts_de_seine_codes)
+        customer_code = random.choice(suburb_codes)
     else:
         customer_code = random.choice(paris_postal_codes)
 
     types = ["pharmacy", "clinic", "supplier"]
-    if hospital:
-        types = ["hospital"] # we must include 1 hospital
     
-    customer_type = random.choice(types)
+    customer_type = random.choices(types, [0.7, 0.1, 0.2])
 
-    return [customer_code, customer_type]
+    return [customer_code, *customer_type]
 
 def random_customers(amount):
     customers = []
-    hospital = True
+    customers.append((0, random.choice(suburb_codes), "hospital"))
 
-    for i in range(amount):
-        customer = tuple([i] + random_customer(hospital))
+    for i in range(1, amount):
+        customer = tuple([i] + random_customer())
         customers.append(customer)
-        if customer[2] == "hospital":
-            hospital = False
 
     con = sqlite3.connect("database.sqlite")
     cur = con.cursor()
+    cur.execute("DELETE FROM customers")
     cur.executemany("INSERT INTO customers VALUES (?, ?, ?)", customers)
     con.commit()
 
