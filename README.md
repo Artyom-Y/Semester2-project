@@ -7,6 +7,11 @@ A small medical delivery company operates daily in an urban and peri‑urban env
 > python 3.14.5
 Venv, pip install, api key...
 
+## How to use
+
+Login: root
+Password: 1234
+
 ## Technical aspects and project structure (TODO)
 
 Flask, SQLAlchemy, Javascript APIs...
