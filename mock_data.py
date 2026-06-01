@@ -46,7 +46,9 @@ def random_customer(in_paris_chance = 0.66): # according to our client, 66% cust
 
     return [customer_code, *customer_type]
 
+
 def random_customers(amount):
+    """Call random_customer 'amount' times and insert it into customers table (replace current table)"""
     customers = []
     customers.append((0, random.choice(suburb_codes), "hospital"))
 
@@ -60,4 +62,42 @@ def random_customers(amount):
     cur.executemany("INSERT INTO customers VALUES (?, ?, ?)", customers)
     con.commit()
 
-random_customers(35)
+
+def random_orders():
+    """Generate orders based on current customers list. This function is meant for testing purposes and it contains a lot of magic numbers"""
+    con = sqlite3.connect("database.sqlite")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM customers")
+    res = cur.fetchall()
+    orders = []
+    count = 0
+
+    for customer_idx, _, customer_type in res:
+        order_amount = random.choices([1,2,3], [0.6, 0.3, 0.1])[0]
+        for _ in range(order_amount):
+            temp_sensitive = random.choices([0,1], [0.9, 0.1])[0]
+            deadline = ""
+
+            match customer_type:
+                case "hospital":
+                    deadline = random.choices([random.randrange(7, 9), random.randrange(10, 12)], [0.7, 0.3])[0]
+                case "clinic":
+                    if random.random() < 0.7:
+                        deadline = random.choices([random.randrange(9, 13), random.randrange(14, 19)], [0.4, 0.6])[0]
+                case "pharmacy":
+                    if random.random() < 0.3:
+                        deadline = random.choices([random.randrange(12, 15), random.randrange(16, 20)], [0.4, 0.6])[0]
+
+            if deadline:
+                deadline = str(deadline) + ":00"
+
+            orders.append((count, customer_idx, temp_sensitive, deadline))
+            count += 1
+
+    cur.execute("DELETE FROM orders")
+    cur.executemany("INSERT INTO orders VALUES (?, ?, ?, ?)", orders)
+    con.commit()
+    
+
+if __name__ == "__main__":
+    random_orders()
