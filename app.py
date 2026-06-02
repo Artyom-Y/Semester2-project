@@ -8,13 +8,15 @@ app.jinja_env.auto_reload = True
 
 @app.route("/")
 def login():
-    if not session["user"]:
+    if "user" not in session:
         return render_template("login.html")
     else:
         redirect(url_for("dashboard.html"))
 
 @app.route("/dashboard")
 def dashboard():
+    # if "user" not in session:
+    #     return render_template("login.html")
     return render_template("dashboard.html")
 
 if __name__ == '__main__':
