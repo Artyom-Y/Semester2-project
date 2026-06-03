@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}"/>
+</head>
+<body>
+    <ul>
+        <li><a id="time"></a></li>
+        <li><a href="{{ url_for('static', filename='dashboard.html') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('static', filename='settings.html') }}">Settings</a></li>
+    </ul>
+
+    <script>
+        function curTime() {
+        const date = new Date();
+        display_date = date.toLocaleTimeString("en-US");
+        let title = document.getElementById("time");
+        title.innerHTML = display_date;
+        }
+        curTime();
+        setInterval(curTime, 1000);
+    </script>
+</body>
+</html>
