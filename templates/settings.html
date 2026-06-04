@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}"/>
+    <title>Settings</title>
+</head>
+<body>
+    <div class="layout-container">
+        {% include "navbar.html" %}
+        <main class="settings-main">
+            <h2>Settings</h2>
+        
+        
+            {% if settings_status is defined %}
+                <span style="color:#97cbff">{{settings_status}}</span>
+            {% endif %}
+            
+            <!--API key, logout, randomize-->
+            <form method="post" id="maps-key-form">
+              <label for="google_maps_key">Enter google API key:</label>
+              <input type="text" name="google_maps_key" value="{{google_maps_key}}"><br>
+              <input type="submit" value="Update">
+            </form>
+        
+            <hr>
+        
+            <p>Randomize orders</p>
+            <form method="get" action="randomize" id="orders-form">
+                <input type="hidden" name="type" value="orders">
+                <input type="submit" value="Randomize">
+            </form>
+        
+            <hr>
+        
+            <p>Randomize customers and orders</p>
+            <form method="get" action="randomize" id="customers-orders-form">
+                <input type="hidden" name="type" value="customers_orders">
+                <label for="customer_count">Enter new number of customers:</label>
+                <input type="number" name="customer_count" value="35" min="10" max="50"><br>
+                <input type="submit" value="Randomize">
+            </form>
+        
+            <hr>
+        
+            <a href="logout">Logout</a>
+        </main>
+    </div>
+
+</body>
+</html>

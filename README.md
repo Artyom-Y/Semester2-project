@@ -6,6 +6,7 @@ A small medical delivery company operates daily in an urban and peri‑urban env
 
 > python 3.14.5
 Venv, pip install, api key...
+https://developers.google.com/maps/demo-key
 
 ## How to use
 
