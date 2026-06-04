@@ -12,7 +12,7 @@ def login_check(username: str, password: str) -> bool:
         return False
     return True
 
-
+# .env file
 def create_env_if_not_exists():
     if not os.path.exists(".env"):
         with open(".env", "w") as file:
@@ -28,3 +28,5 @@ def set_google_key(value: str):
     path = find_dotenv()
     load_dotenv()
     set_key(path, "GOOGLE_MAPS_KEY", value)
+
+# dashboard data

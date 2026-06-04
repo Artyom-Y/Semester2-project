@@ -20,7 +20,7 @@
   padding: 8px 16px;
 }
 
-.sidebar ul li a:hover:not(#time) {
+.sidebar ul li a:hover:not(#time, #weather) {
     background-color: #97cbff;
     border-radius: 5px;
 }
