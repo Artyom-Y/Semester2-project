@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}"/>
+    <title>Dashboard</title>
+</head>
+<body>
+    
+    <div class="layout-container">
+        {% include "navbar.html" %}
+        <main class="dashboard-main">
+            <!--Bullet point information, warnings, map with orders-->
+            <p>Map here. Highlight areas with orders (green for any order, blue for temperature sensitive). Show number of orders per area. Maybe display traffic jams</p>
+            <p>Overview information: total drivers, orders, etc</p>
+            <p>Warnings: time constraints, check if refrigerated orders are too far away, weather constraints, etc</p>            
+        </main>
+    </div>
+
+</body>
+</html>
