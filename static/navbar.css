@@ -1,48 +1,47 @@
-.layout-container {
-  display: flex;
-  min-height: 100vh;
+body {
+    margin: 0;
 }
 
-.sidebar {
-  flex: 0 0 240px;
-  background: #f1f1f1;
-}
-
-.sidebar ul {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 25%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
-.sidebar li a {
+ul li a {
   display: block;
   color: #000;
   padding: 8px 16px;
+  text-decoration: none;
 }
 
-.sidebar ul li a:hover:not(#time, #weather) {
+ul li a:hover:not(#time) {
     background-color: #97cbff;
     border-radius: 5px;
 }
 
-@media (max-width: 900px) {
-  .layout-container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    flex: 0 0 auto;
+@media screen and (max-width: 900px) {
+  ul {
     width: 100%;
+    height: auto;
+    position: relative;
   }
-
-  .sidebar li a {
+  
+  ul li a {
     float: left;
     padding: 15px;
   }
+  
+  div.content {margin-left: 0;}
 }
 
-@media (max-width: 400px) {
-  .sidebar li a {
+@media screen and (max-width: 400px) {
+  ul li a {
     text-align: center;
     float: none;
   }
