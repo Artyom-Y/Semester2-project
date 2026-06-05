@@ -33,15 +33,12 @@ def set_google_key(value: str):
 def get_table(name):
     con = sqlite3.connect("database.sqlite")
     cur = con.cursor()
-    cur.execute(f"SELECT * FROM {name}")
+    cur.execute(f"SELECT * FROM {name.strip()}")
     return cur.fetchall()
 
-def get_orders_join_customers():
+def get_orders():
     """Return format: (ord_id, cust_id, temp_sensitive, deadline, zone, cust_type)"""
     con = sqlite3.connect("database.sqlite")
     cur = con.cursor()
     cur.execute("SELECT * FROM orders INNER JOIN customers USING(cust_id)")
     return cur.fetchall()
-
-# print(get_table("drivers"))
-print(get_orders_join_customers())
