@@ -3,51 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}"/>
     <title>Settings</title>
 </head>
 <body>
+    
+    {% include "theme_toggle.html" %}
+
     <div class="layout-container">
         {% include "navbar.html" %}
         <main class="settings-main">
-            <h2>Settings</h2>
+            
+            <h2 class="settings-title">System Settings</h2>
         
-        
-            {% if settings_status is defined %}
-                <span style="color:#97cbff">{{settings_status}}</span>
+            {% if settings_status %}
+                <div class="dashboard-widget settings-alert-success">
+                    <p>✓ {{settings_status}}</p>
+                </div>
             {% endif %}
             
-            <!--API key, logout, randomize-->
-            <form method="post" id="maps-key-form">
-              <label for="google_maps_key">Enter google API key:</label>
-              <input type="text" name="google_maps_key" value="{{google_maps_key}}"><br>
-              <input type="submit" value="Update">
-            </form>
-        
-            <hr>
-        
-            <p>Randomize orders</p>
-            <form method="get" action="randomize" id="orders-form">
-                <input type="hidden" name="type" value="orders">
-                <input type="submit" value="Randomize">
-            </form>
-        
-            <hr>
-        
-            <p>Randomize customers and orders</p>
-            <form method="get" action="randomize" id="customers-orders-form">
-                <input type="hidden" name="type" value="customers_orders">
-                <label for="customer_count">Enter new number of customers:</label>
-                <input type="number" name="customer_count" value="35" min="10" max="50"><br>
-                <input type="submit" value="Randomize">
-            </form>
-        
-            <hr>
-        
-            <a href="logout">Logout</a>
+            <div class="dashboard-widgets-row">
+                
+                <div class="dashboard-widget">
+                    <h3 class="widget-title">Map Configuration</h3>
+                    <form method="post" id="maps-key-form">
+                        <label for="google_maps_key" class="stat-label settings-label-spacing">Google Maps API Key</label>
+                        <input type="text" name="google_maps_key" value="{{google_maps_key}}" class="full-width-input">
+                        <input type="submit" value="Save Configuration" class="full-width-btn">
+                    </form>
+                </div>
+            
+                <div class="dashboard-widget">
+                    <h3 class="widget-title">Simulation Data</h3>
+                    
+                    <div class="settings-section-spacing">
+                        <p class="stat-label settings-label-spacing">Shuffle Active Orders</p>
+                        <form method="get" action="randomize" id="orders-form">
+                            <input type="hidden" name="type" value="orders">
+                            <input type="submit" value="Randomize Orders" class="secondary-btn">
+                        </form>
+                    </div>
+                    
+                    <hr class="settings-divider">
+                    
+                    <div>
+                        <p class="stat-label settings-label-spacing">Generate New Customers & Orders</p>
+                        <form method="get" action="randomize" id="customers-orders-form">
+                            <input type="hidden" name="type" value="customers_orders">
+                            <div class="input-group">
+                                <input type="number" name="customer_count" value="35" min="10" max="50" class="flex-1">
+                                <input type="submit" value="Generate" class="flex-1">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="danger-zone">
+                <a href="logout" class="danger-btn">Log Out</a>
+            </div>
+            
         </main>
     </div>
 
 </body>
+<footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</footer>
 </html>

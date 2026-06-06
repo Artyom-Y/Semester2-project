@@ -34,7 +34,7 @@ def login():
 def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
-    return render_template("dashboard.html", drivers=get_table("drivers"), orders=get_orders())
+    return render_template("dashboard.html", drivers=get_table("drivers"), orders=get_orders(), google_maps_key=get_google_key())
 
 settings_messages = {"rand_ord": "Randomized orders successfully", "rand_cust_ord": "Randomized orders and customers successfully"}
 
