@@ -10,6 +10,7 @@
 <body>
     <div class="layout-container">
         {% include "navbar.html" %}
+        {% include "theme_toggle.html" %}
         <main class="settings-main">
             <h2>Settings</h2>
         
@@ -50,4 +51,8 @@
     </div>
 
 </body>
+<footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</footer>
 </html>

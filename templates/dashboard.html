@@ -11,6 +11,7 @@
     
     <div class="layout-container">
         {% include "navbar.html" %}
+        {% include "theme_toggle.html" %}
         <main class="dashboard-main">
             <!--Widgets: Bullet point information, warnings, map with orders-->
             <p>Map here. Highlight areas with orders (green for any order, blue for temperature sensitive). Show number of orders per area. Maybe display traffic jams</p>
@@ -43,6 +44,7 @@
 
 </body>
 <footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </footer>
 </html>
