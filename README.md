@@ -22,4 +22,3 @@ Flask, SQLAlchemy, Javascript APIs...
 Artem, Success, Yuchen
 
 ---
-
