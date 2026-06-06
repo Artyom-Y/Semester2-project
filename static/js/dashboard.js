@@ -54,27 +54,38 @@ function initMap() {
         const coords = getApproximateCoords(zoneId);
         
         // Blue if temp sensitive, Green if normal
-        const circleColor = data.hasTempSensitive ? "#3B82F6" : "#10B981";
+        const dotColor = data.hasTempSensitive ? "#3B82F6" : "#10B981";
 
-        const circle = new google.maps.Circle({
-            strokeColor: circleColor,
-            strokeOpacity: 0.8,
+        // Define a clean, solid SVG dot
+        const svgDot = {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: dotColor,
+            fillOpacity: 1,
             strokeWeight: 2,
-            fillColor: circleColor,
-            fillOpacity: 0.35,
-            map,
-            center: coords,
-            radius: 600 + (data.count * 100), // Size grows with order count
+            strokeColor: "#0B1120", // Matches your deep navy theme for a crisp border
+            scale: 7 + (data.count * 0.3) // Starts small at 7px, grows very slightly with order volume
+        };
+
+        // Create the Marker instead of a Circle
+        const marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            icon: svgDot,
+            title: `Zone: ${zoneId}` // Native tooltip on hover
         });
 
-        // Add an InfoWindow on click
+        // Keep your custom InfoWindow
         const infoWindow = new google.maps.InfoWindow({
-            content: `<div style="color:black; font-family: sans-serif;"><strong>Zone: ${zoneId}</strong><br>Total Orders: ${data.count}</div>`
+            content: `<div class="custom-info-window"><strong>Zone: ${zoneId}</strong>Total Orders: ${data.count}</div>`
         });
 
-        circle.addListener("click", () => {
-            infoWindow.setPosition(coords);
-            infoWindow.open(map);
+        // Open the InfoWindow anchored to the new dot when clicked
+        marker.addListener("click", () => {
+            infoWindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
         });
     }
 }
