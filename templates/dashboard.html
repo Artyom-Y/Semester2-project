@@ -11,10 +11,32 @@
     <div class="layout-container">
         {% include "navbar.html" %}
         <main class="dashboard-main">
-            <!--Bullet point information, warnings, map with orders-->
+            <!--Widgets: Bullet point information, warnings, map with orders-->
             <p>Map here. Highlight areas with orders (green for any order, blue for temperature sensitive). Show number of orders per area. Maybe display traffic jams</p>
             <p>Overview information: total drivers, orders, etc</p>
-            <p>Warnings: time constraints, check if refrigerated orders are too far away, weather constraints, etc</p>            
+            <p>Warnings: time constraints, check if refrigerated orders are too far away, weather constraints, etc</p>
+
+            <div class="dashboard-widget" id="drivers">
+                <h3>Drivers</h3>
+                <p>Drivers available: {{drivers|length}}</p>
+                <ul>
+                    {% for driver in drivers %}
+                        {% set work_until = driver[2].split(':') %}
+                        {% set end_hour = work_until[0] | int %}
+                        {% set end_hour = end_hour + driver[3] %}
+                        <li>{{ driver[1] }}: {{ driver[2] }} - {{ end_hour ~ ":" ~ work_until[1] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="dashboard-widget" id="orders">
+                <h3>Orders</h3>
+                <p>Total orders: {{orders|length}}</p>
+                <p>Orders with deadline: </p>
+                <p>Refrigerated orders: </p>
+
+                
+            </div>
         </main>
     </div>
 

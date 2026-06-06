@@ -30,3 +30,15 @@ def set_google_key(value: str):
     set_key(path, "GOOGLE_MAPS_KEY", value)
 
 # dashboard data
+def get_table(name):
+    con = sqlite3.connect("database.sqlite")
+    cur = con.cursor()
+    cur.execute(f"SELECT * FROM {name.strip()}")
+    return cur.fetchall()
+
+def get_orders():
+    """Return format: (ord_id, cust_id, temp_sensitive, deadline, zone, cust_type)"""
+    con = sqlite3.connect("database.sqlite")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM orders INNER JOIN customers USING(cust_id)")
+    return cur.fetchall()

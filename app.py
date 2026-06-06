@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for, request
-from utils import login_check, create_env_if_not_exists, get_google_key, set_google_key
+from utils import login_check, create_env_if_not_exists, get_google_key, set_google_key, get_table, get_orders
 from mock_data import random_customers, random_orders
 
 app = Flask(__name__)
@@ -34,13 +34,12 @@ def login():
 def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", drivers=get_table("drivers"), orders=get_orders())
 
 settings_messages = {"rand_ord": "Randomized orders successfully", "rand_cust_ord": "Randomized orders and customers successfully"}
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings(settings_status=""):
-    print(settings_status)
     google_maps_key = get_google_key()
     if settings_status in settings_messages.keys():
         settings_status = settings_messages[settings_status]
