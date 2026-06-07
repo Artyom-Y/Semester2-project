@@ -35,10 +35,10 @@
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
-    border-left: 4px solid transparent; /* Hidden border for animation */
+    border-left: 4px solid transparent; /* Hidden border */
 }
 
-/* Hover animation */
+/* Hover effect */
 .sidebar ul li a:hover:not(#time, #weather) {
     background-color: rgba(255, 159, 28, 0.05);
     color: var(--accent-color);

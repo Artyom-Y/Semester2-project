@@ -3,11 +3,11 @@
     color: var(--text-color);
 }
 
-/* Success Alert Box */
+/* Status box */
 .settings-alert-success {
     margin-bottom: 24px;
     border: 1px solid var(--accent-color);
-    background: rgba(255, 159, 28, 0.05); /* Very faint amber background */
+    background: rgba(255, 159, 28, 0.05);
 }
 
 .settings-alert-success p {
@@ -16,7 +16,7 @@
     font-weight: bold;
 }
 
-/* Form Utilities */
+/* Forms */
 .full-width-input {
     width: 100%;
 }
@@ -50,7 +50,7 @@
     flex: 1;
 }
 
-/* Button Variants */
+/* Buttons */
 .secondary-btn {
     background-color: var(--input-bg);
     color: var(--text-color);
@@ -61,7 +61,7 @@
     background-color: var(--input-border);
 }
 
-/* Danger Zone */
+/* Danger zone (logout) */
 .danger-zone {
     margin-top: 24px;
 }

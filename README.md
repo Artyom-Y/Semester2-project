@@ -1,4 +1,4 @@
-# Semester 2 Project — Premium Pharmatics Dashboard
+# Semester 2 Project — MediRun Dashboard
 
 This prototype is a Flask web app with a dashboard for a made up small last-mile medical delivery company. It includes a simple login, a dashboard showing drivers and orders (with google maps visualization), and settings to configure a Google Maps API key. The data is stored in an SQLite database
 
