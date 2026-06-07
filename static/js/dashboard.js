@@ -51,7 +51,8 @@ function initMap() {
 
     // Plot the grouped zones on the map
     for (const [zoneId, data] of Object.entries(zones)) {
-        const coords = getApproximateCoords(zoneId);
+        let coords = getApproximateCoords(zoneId);
+        coords = jitterCoord(coords);
         
         // Blue if temp sensitive, Green if normal
         const dotColor = data.hasTempSensitive ? "#3B82F6" : "#10B981";
@@ -93,7 +94,8 @@ function initMap() {
     const facilitiesDataElement = document.getElementById("facilities-data");
     const rawFacilities = JSON.parse(facilitiesDataElement.textContent)
     rawFacilities.forEach(facility => {
-            const coords = getApproximateCoords(facility.zone);
+            let coords = getApproximateCoords(facility.zone);
+            coords = jitterCoord(coords);
 
             const svgArrow = {
             path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -116,16 +118,24 @@ function getApproximateCoords(postalCode) {
     const baseLat = 48.8566; 
     const baseLng = 2.3522;
     // Offset so markers don't stack on top of each other (an issue when several orders are in the same zone)
-    const offset = (parseInt(postalCode) % 100) * 0.0015; 
+     
 
     if (codeStr.startsWith('700')) { // Paris
-        return { lat: baseLat + (offset % 0.02), lng: baseLng + offset };
+        return { lat: 48.8566, lng: 2.3522};
     } else if (codeStr.startsWith('93')) { // Seine-Saint-Denis
-        return { lat: baseLat + 0.05 + offset, lng: baseLng + 0.06 - offset };
+        return { lat: 48.9207, lng: 2.4863};
     } else if (codeStr.startsWith('92')) { // Hauts-de-Seine
-        return { lat: baseLat - 0.02 + offset, lng: baseLng - 0.07 + offset };
+        return { lat: 48.8484, lng: 2.1795};
     } else if (codeStr.startsWith('94')) { // Val-de-Marne
-        return { lat: baseLat - 0.05 + offset, lng: baseLng + 0.05 + offset };
+        return { lat: 48.7798, lng: 2.4794};
     }
     return { lat: baseLat, lng: baseLng };
+}
+// Added this because using geocoding is expensive. This emulates order's location
+function jitterCoord(coord, amount=0.05) {
+    const sign = Array(1, -1)
+    return {
+        lat: coord.lat + (Math.random() - 0.5) * amount * sign[Math.floor(Math.random() * sign.length)],
+        lng: coord.lng + (Math.random() - 0.5) * amount * sign[Math.floor(Math.random() * sign.length)],
+        };
 }

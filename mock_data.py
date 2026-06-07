@@ -28,7 +28,7 @@ hauts_de_seine_codes = [
 suburb_codes = seine_saint_denis_codes + val_de_marne_codes + hauts_de_seine_codes
 
 
-def random_customer(in_paris_chance = 0.66): # according to our client, 66% customers are in Paris
+def random_customer(in_paris_chance: float = 0.66) -> list[int, str]: # according to our client, 66% customers are in Paris
     """Helper function for generating a random customer. 
     We don't have access to any real data, so we use mock one."""
     in_paris = False
@@ -47,7 +47,7 @@ def random_customer(in_paris_chance = 0.66): # according to our client, 66% cust
     return [customer_code, *customer_type]
 
 
-def random_customers(amount):
+def random_customers(amount: int) -> None:
     """Call random_customer 'amount' times and insert it into customers table (replace current table)"""
     customers = []
     customers.append((0, random.choice(suburb_codes), "hospital"))
@@ -63,7 +63,7 @@ def random_customers(amount):
     con.commit()
 
 
-def random_orders():
+def random_orders() -> None:
     """Generate orders based on current customers list. This function is meant for testing purposes and it contains a lot of magic numbers"""
     con = sqlite3.connect("database.sqlite")
     cur = con.cursor()
