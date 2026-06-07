@@ -8,7 +8,7 @@
     <title>Dashboard</title>
 </head>
 <body>
-    
+
     <div class="layout-container">
         {% include "navbar.html" %}
         {% include "theme_toggle.html" %}
@@ -53,17 +53,20 @@
     </div>
 
 </body>
+
 <footer>
-    <script type="application/json" id="orders-data">
+    <!--Data for dashboard.js-->
+    <script type="application/json" id="orders-data"> 
         {{ orders | tojson }}
     </script>
+    <script type="application/json" id="facilities-data">
+        {{ facilities | tojson }}
+    </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/dashboard.js"></script>
 
-    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=initMap&loading=async"></script>
 </footer>
-</body>
-</html>
 </html>

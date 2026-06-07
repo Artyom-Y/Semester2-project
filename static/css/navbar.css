@@ -6,7 +6,7 @@
     flex-direction: column;
 }
 
-/* New Brand Header */
+/* Brand header */
 .sidebar-header {
     padding: 24px 20px;
     font-size: 20px;
@@ -38,14 +38,14 @@
     border-left: 4px solid transparent; /* Hidden border for animation */
 }
 
-/* Hover state creates a cool accent bar on the left */
+/* Hover animation */
 .sidebar ul li a:hover:not(#time, #weather) {
-    background-color: rgba(255, 159, 28, 0.05); /* Subtle highlight */
+    background-color: rgba(255, 159, 28, 0.05);
     color: var(--accent-color);
     border-left: 4px solid var(--accent-color);
 }
 
-/* Time and Weather look like UI stats, not links */
+/* Time and weather */
 #time, #weather {
     opacity: 0.6;
     font-size: 13px;

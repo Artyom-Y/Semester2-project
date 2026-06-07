@@ -5,11 +5,6 @@ from mock_data import random_customers, random_orders
 app = Flask(__name__)
 app.secret_key = "semester project"
 
-# remove on production
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.jinja_env.auto_reload = True
-
-
 @app.route("/", methods=["GET", "POST"])
 def login():
     create_env_if_not_exists()
@@ -34,15 +29,18 @@ def login():
 def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
-    return render_template("dashboard.html", drivers=get_table("drivers"), orders=get_orders(), google_maps_key=get_google_key())
+    return render_template("dashboard.html", drivers=get_table("drivers"), facilities=get_table("facilities"), orders=get_orders(), google_maps_key=get_google_key())
 
 settings_messages = {"rand_ord": "Randomized orders successfully", "rand_cust_ord": "Randomized orders and customers successfully"}
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings(settings_status=""):
     google_maps_key = get_google_key()
+    settings_status = request.args.get("settings_status")
     if settings_status in settings_messages.keys():
-        settings_status = settings_messages[settings_status]
+        display_message = settings_messages[settings_status]
+    else:
+        display_message = ""
 
     if request.method == "POST":
         new_key = request.form["google_maps_key"]
@@ -52,7 +50,7 @@ def settings(settings_status=""):
         except:
             settings_status = "Couldn't update the key"
 
-    return render_template("settings.html", settings_status=settings_status, google_maps_key=google_maps_key)
+    return render_template("settings.html", display_message=display_message, google_maps_key=google_maps_key)
 
 @app.route("/randomize")
 def randomize():
@@ -74,4 +72,4 @@ def logout():
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

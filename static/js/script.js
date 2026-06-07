@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
     const THEME_KEY = 'delivery_app_theme';
 
-    // 1. Immediately apply the saved theme on ALL pages
+    // Immediately apply the saved theme on all pages (dark by default)
     const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
     htmlElement.setAttribute('data-theme', savedTheme);
 
-    // 2. Handle the toggle button ONLY if it exists on the page
+    // Handle the toggle button only if it exists on the page
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         updateButtonLabel(savedTheme);

@@ -19,10 +19,9 @@
 }
 
 .warning-widget {
-    /* Replace the solid color with a sleek gradient */
     background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(153, 27, 27, 0.2) 100%);
     border: 1px solid rgba(220, 38, 38, 0.3);
-    border-top: 3px solid var(--error-color); /* Bold top accent line */
+    border-top: 3px solid var(--error-color);
 }
 
 .warning-widget .widget-title::before {
