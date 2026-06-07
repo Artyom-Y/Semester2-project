@@ -1,0 +1,82 @@
+.settings-title {
+    margin-bottom: 24px;
+    color: var(--text-color);
+}
+
+/* Success Alert Box */
+.settings-alert-success {
+    margin-bottom: 24px;
+    border: 1px solid var(--accent-color);
+    background: rgba(255, 159, 28, 0.05); /* Very faint amber background */
+}
+
+.settings-alert-success p {
+    color: var(--accent-color);
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Form Utilities */
+.full-width-input {
+    width: 100%;
+}
+
+.full-width-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.settings-section-spacing {
+    margin-bottom: 20px;
+}
+
+.settings-label-spacing {
+    margin-bottom: 8px;
+    display: block; /* Ensures the stat-label respects the margin */
+}
+
+.settings-divider {
+    border-color: var(--input-border);
+    opacity: 0.5;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Button Variants */
+.secondary-btn {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+}
+
+.secondary-btn:hover {
+    background-color: var(--input-border);
+}
+
+/* Danger Zone */
+.danger-zone {
+    margin-top: 24px;
+}
+
+.danger-btn {
+    color: var(--error-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: 1px solid var(--error-color);
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.danger-btn:hover {
+    background-color: var(--error-color);
+    color: var(--bg-color); /* Swaps to dark text on red background */
+}

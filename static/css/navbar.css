@@ -1,0 +1,89 @@
+.sidebar {
+    flex: 0 0 240px;
+    background-color: var(--container-bg);
+    border-right: 1px solid var(--input-border);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Brand header */
+.sidebar-header {
+    padding: 24px 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--input-border);
+    margin-bottom: 12px;
+}
+
+.sidebar-header span {
+    color: var(--accent-color);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.sidebar li a {
+    display: block;
+    color: var(--text-color);
+    padding: 16px 24px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent; /* Hidden border for animation */
+}
+
+/* Hover animation */
+.sidebar ul li a:hover:not(#time, #weather) {
+    background-color: rgba(255, 159, 28, 0.05);
+    color: var(--accent-color);
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Time and weather */
+#time, #weather {
+    opacity: 0.6;
+    font-size: 13px;
+    padding: 8px 24px;
+    pointer-events: none; 
+}
+
+#weather {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        flex: 0 0 auto;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--input-border);
+    }
+    
+    .sidebar-header {
+        border-bottom: none;
+        padding: 16px 20px 0 20px;
+        margin-bottom: 0;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sidebar li a {
+        padding: 15px 20px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .sidebar ul li a:hover:not(#time, #weather) {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-color);
+    }
+}
