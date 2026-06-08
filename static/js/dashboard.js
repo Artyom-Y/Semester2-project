@@ -95,7 +95,6 @@ function initMap() {
     const rawFacilities = JSON.parse(facilitiesDataElement.textContent)
     rawFacilities.forEach(facility => {
             let coords = getApproximateCoords(facility.zone);
-            coords = jitterCoord(coords);
 
             const svgArrow = {
             path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
